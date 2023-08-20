@@ -273,19 +273,10 @@ public class DirectPostgresqlManager
     if (whereClause == null || whereClause.isEmpty()) {
         whereClause = "1=1";
     }
-
+    sb.append(escapedTableName);
     // Import from a SELECT QUERY
     sb.append("(");
-    sb.append("SELECT ");
-    if (null != cols) {
     sb.append(getSelectListColumnsStr(cols, tableName));
-    } else {
-      sb.append("*");
-    }
-    sb.append(" FROM ");
-    sb.append(escapedTableName);
-    sb.append(" WHERE ");
-    sb.append(whereClause);
     sb.append(")");
 
     // Translate delimiter characters to '\ooo' octal representation.
